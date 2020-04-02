@@ -8,7 +8,7 @@
  */
 Storage.prototype.setAnyItem = function (keyName, anyItem, replacer, space) {
   let jsonStr = JSON.stringify(anyItem, replacer, space);
-  this.setItem(keyName, jsonStr);
+  return this.setItem(keyName, jsonStr);
 }
 
 
