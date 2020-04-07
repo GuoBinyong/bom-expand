@@ -1,9 +1,10 @@
 {
   "name": "bom-expand",
   "version": "1.0.0",
-  "description": "bom-expand 提供了对 浏览器 中 bom 对象的扩展（如 Location、Storage 等等），也提供了一些工具函数；",
+  "description": "bom-expand 提供了对 浏览器 中 bom 对象的扩展（如 Storage 等等），也提供了一些工具函数；",
   "main": "dist/bom-expand.js",
   "module": "src/index.js",
+  "types": "types/index.d.ts",
   "sideEffects": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -24,7 +25,6 @@
     "浏览器扩展",
     "browser 扩展",
     "browser expand",
-    "Location",
     "Storage"
   ],
   "author": "郭斌勇",
