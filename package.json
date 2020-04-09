@@ -76,5 +76,8 @@
     "webpack-cli": "^3.3.11",
     "webpack-merge": "^4.2.2",
     "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "es-expand": "^1.0.2"
   }
 }

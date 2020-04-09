@@ -21,6 +21,5 @@ Storage.prototype.setAnyItem = function (keyName, anyItem, replacer, space) {
  */
 Storage.prototype.getParsedItem = function (keyName, reviver) {
   let jsonStr = this.getItem(keyName);
-  let item = JSON.correctParse(jsonStr, reviver);
-  return item;
+  return JSON.correctParse(jsonStr, reviver);
 }
