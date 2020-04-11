@@ -1,8 +1,8 @@
 {
   "name": "bom-expand",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "bom-expand 提供了对 浏览器 中 bom 对象的扩展（如 Storage 等等），也提供了一些工具函数；",
-  "main": "dist/bomExpand.js",
+  "main": "dist/bom-expand.umd.js",
   "module": "src/index.js",
   "types": "types/index.d.ts",
   "sideEffects": true,
@@ -87,6 +87,6 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "es-expand": "^1.0.2"
+    "es-expand": "^1.0.5"
   }
 }

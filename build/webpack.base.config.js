@@ -1,4 +1,4 @@
-/* 
+/*
 开发 和 生产两种模式公共的 webpack 配置文件
 https://github.com/GuoBinyong/library-webpack-template
 */
@@ -15,6 +15,7 @@ function resolve(dir) {
 }
 
 
+
 /**
  * 生成 Webpack 配置对象
  * @param  projectConfig : ProjecConfig    项目配置对象
@@ -26,19 +27,32 @@ module.exports = function createWebpackConfig(projectConfig) {
     return path.posix.join(projectConfig.staticOutDirectory, _path)
   }
 
-  var libraryName = projectConfig.library || tools.stringToCamelFormat(npmConfig.name);
-  
+  var packageName = npmConfig.name;
+  var libraryName = projectConfig.library
+  if (libraryName === undefined){
+    libraryName = tools.stringToCamelFormat(packageName);
+  }else if(libraryName === null){
+    libraryName = undefined;
+  }
+
+  var libraryTarget = projectConfig.libraryTarget;
+  if (libraryTarget === null){
+    libraryTarget = undefined;
+  }
+
+
+
 
   const wpConfig = {
     target: projectConfig.target,  //node  web 等等
     context: path.resolve(__dirname, '../'),
     entry: {
-      [libraryName]: projectConfig.entry,
+      [packageName]: projectConfig.entry,
     },
     output: {
-      filename: projectConfig.filename || '[name].js',
+      filename: projectConfig.filename ||  (libraryTarget ? `[name].${libraryTarget}.js` : "[name].js"),
       library: libraryName,
-      libraryTarget: projectConfig.libraryTarget,
+      libraryTarget: libraryTarget,
       libraryExport: projectConfig.libraryExport,
     },
     externals: projectConfig.externals || webpackNodeExternals(),
@@ -48,20 +62,24 @@ module.exports = function createWebpackConfig(projectConfig) {
     },
     module: {
       rules: [
+        ...(projectConfig.useEslint ? [{
+          test: /\.(js|ts|vue)$/,
+          loader: 'eslint-loader',
+          enforce: 'pre',
+          include: [resolve('src'),resolve('types'), resolve('test')],
+          options: {
+            formatter: require('eslint-formatter-friendly'),
+            emitWarning: !projectConfig.showEslintErrorsInOverlay
+          }
+        }] : []),
         {
           test: /\.js$/,
-          use: {
-            loader: "babel-loader",
-            options:tools.createBabelLoaderOptions("js")
-          },
+          use: tools.createBabelLoader("js"),
           exclude: /node_modules/
         },
         {
           test: /\.jsx$/,
-          use: {
-            loader: "babel-loader",
-            options: tools.createBabelLoaderOptions("jsx")
-          },
+          use: tools.createBabelLoader("jsx"),
           exclude: /node_modules/
         },
         {
@@ -126,7 +144,7 @@ module.exports = function createWebpackConfig(projectConfig) {
     baReport = process.env.npm_config_report;
   }
 
-  
+
   if (baReport) {
     const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
     let baOpts = projectConfig.bundleAnalyzerOptions || {};
