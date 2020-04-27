@@ -123,6 +123,8 @@
     - 该方法是通过 严格相等 `===` 运算符来判断 数组的元素是否重复的；
     */
     getNoRepeats: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value() {
         return this.filter(function (currentItem, index, arr) {
@@ -141,6 +143,8 @@
      - 该方法是通过 isRepeated 函数来判断 数组的元素是否重复的；
      */
     getNoRepeatsUseRepeatTest: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(isRepeated) {
         return this.filter(function (currentItem, index, arr) {
@@ -175,6 +179,8 @@
      *
      */
     safelyOperateIndexs: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(indexList, operation, thisValue) {
         var _this = this;
@@ -211,6 +217,8 @@
      *
      */
     safelyOperateItems: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(itemList, operation, thisValue) {
         var _this2 = this;
@@ -249,6 +257,8 @@
      *
      */
     safelyFilter: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(operation, thisValue) {
         var _this3 = this;
@@ -277,6 +287,8 @@
      * @returns Array   被移动的元素的数组
      */
     move: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(fromIndex, toIndex) {
         var length = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
@@ -294,6 +306,8 @@
      * @returns Array<Item>   被移动的元素的数组
      */
     moveTo: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(toIndex) {
         for (var _len = arguments.length, fromIndexs = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -314,6 +328,8 @@
      * @returns Array<number>   被移动的元素的索引的数组
      */
     moveItemsTo: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(toIndex) {
         for (var _len2 = arguments.length, items = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
@@ -334,6 +350,8 @@
      * @returns Array<Item>   被移动的元素的数组
      */
     moveToUseTest: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(toIndex, needMoveTest, thisValue) {
         var moveItems = this.deleteUseTest(needMoveTest, thisValue);
@@ -353,6 +371,8 @@
      * @returns Array<Item>   被删除的元素
      */
     insertItem: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(item) {
         var _this4 = this;
@@ -384,6 +404,8 @@
      * @returns Array<Item>   被删除的元素
      */
     insertItemList: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(itemList, toIndex, equalTest) {
         var _this5 = this;
@@ -407,6 +429,8 @@
      * @returns Array   被删除的元素的数组
      */
     delete: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(start, end) {
         if (end == null) {
@@ -425,6 +449,8 @@
      * @returns Array<Item>   被删除的元素的数组
      */
     deleteIndexs: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value() {
         for (var _len3 = arguments.length, indexs = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -444,6 +470,8 @@
      * @returns Array<number>   被删除的元素的索引数组
      */
     deleteItems: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value() {
         for (var _len4 = arguments.length, items = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
@@ -463,6 +491,8 @@
      * @returns Array<Item>   被删除的元素的数组
      */
     deleteUseTest: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(needDeleteTest, thisValue) {
         if (thisValue === undefined) {
@@ -489,6 +519,8 @@
      * @returns Array<Index>   通过测试的元素的索引
      */
     filterIndexs: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(filterTest, thisArg) {
         if (thisArg == undefined) {
@@ -509,6 +541,7 @@
      * 属性; 返回最后一个元素
      */
     lastItem: {
+      configurable: true,
       enumerable: false,
       get: function get() {
         return this[this.length - 1];
@@ -525,6 +558,8 @@
      * @returns boolean
      */
     isContains: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(arr, equalTest) {
         if (!equalTest) {
@@ -549,6 +584,8 @@
      * @returns Array   所有指定数组的交集
      */
     getIntersection: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(arr, equalTest) {
         if (!equalTest) {
@@ -573,6 +610,8 @@
      * @returns boolean   当前数组与指定数组是否相交
      */
     isIntersect: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(arr, equalTest) {
         if (!equalTest) {
@@ -596,6 +635,8 @@
      * @returns Array   当前数组在指定数组上的补集
      */
     getComplementOn: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(universalArr, equalTest) {
         if (!equalTest) {
@@ -620,6 +661,8 @@
      * @returns Array   返回符合 options 中设置的 包含 和 排除 项 的所有元素
      */
     getIncludeAndExclude: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(options, equalTest) {
         var include = options.include,
@@ -645,6 +688,8 @@
      * @param index : number   正向的索引
      */
     reverseIndexForIndex: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(index) {
         return this.length - index - 1;
@@ -660,6 +705,8 @@
      * @returns Array    返回包含所有删除元素的数组
      */
     queuePush: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value() {
         this.push.apply(this, arguments);
@@ -673,6 +720,8 @@
      * @returns any    返回被删除的元素
      */
     queuePop: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value() {
         this.unshift(undefined);
@@ -687,6 +736,8 @@
      * @returns Array    返回包含所有删除元素的数组
      */
     queueUnshift: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value() {
         this.unshift.apply(this, arguments);
@@ -701,6 +752,8 @@
      * @returns any    返回被删除的元素
      */
     queueShift: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value() {
         this.push(undefined);
@@ -931,6 +984,7 @@
      * 是否是有效的 JSON 字符串
      */
     isJSONString: {
+      configurable: true,
       get: function get() {
         return JSON.isJSONString(this);
       }
@@ -940,6 +994,7 @@
      * 是否不包任何非空字符
      */
     noChars: {
+      configurable: true,
       get: function get() {
         return !/\S+/.test(this);
       }
@@ -949,6 +1004,7 @@
      * 首字母大写
      */
     capFirstLetter: {
+      configurable: true,
       get: function get() {
         return this.replace(/(^\W*)(\w)/, function (match, p1, p2) {
           return p1 + p2.toUpperCase();
@@ -963,6 +1019,8 @@
      * @returns string
      */
     toSeparatorLineFormat: {
+      configurable: true,
+      writable: true,
       value: function value(separator, caseType) {
         if (separator == undefined) {
           separator = "-";
@@ -995,6 +1053,8 @@
      * @returns string
      */
     toHumpFormat: {
+      configurable: true,
+      writable: true,
       value: function value(separators) {
         if (separators == undefined) {
           separators = ['-', '_'];
@@ -1019,6 +1079,8 @@
      * @returns [string]  所有指定格式的字符串数组
      */
     getAllStrForFormats: {
+      configurable: true,
+      writable: true,
       value: function value(formats) {
         var _this = this;
 
@@ -1051,6 +1113,7 @@
      * 是否是URL
      */
     isURL: {
+      configurable: true,
       get: function get() {
         return /^\w+:\/\/\S+/.test(this);
       }
@@ -1161,6 +1224,8 @@
      * @returns [number]   返回 按距离 自己 从近到远排列的数的数组
      */
     distanceSort: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value() {
         for (var _len = arguments.length, nums = new Array(_len), _key = 0; _key < _len; _key++) {
@@ -1186,6 +1251,8 @@
      * @returns [number]   返回 按距离 自己 从近到远排列的数的数组
      */
     nearest: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value() {
         for (var _len2 = arguments.length, nums = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
@@ -1211,6 +1278,8 @@
      * @returns [number]   返回 按距离 自己 从近到远排列的数的数组
      */
     farthest: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value() {
         for (var _len3 = arguments.length, nums = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -1445,6 +1514,9 @@
      * @param testFun:(propValue,propkey,index)=> boolean  ; 测试条件函数
      */
     findKey: {
+      configurable: true,
+      writable: true,
+      //为了兼容 lodash 库，因为 rollup-plugin-typescript2 所依赖的 lodash 库会更改该属性 findKey
       enumerable: false,
       value: function value(testFun) {
         var _this2 = this;
@@ -1462,6 +1534,8 @@
      * @return PropertyInfo : {key:string,value:any}
      */
     findProperty: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(testFun) {
         var prop = Object.entries(this).find(function (entry, index) {
@@ -1485,6 +1559,7 @@
      * 检验该对象自身是否是扁平的，即：该对象的所有的直接属性的属性值都是非对象类型；
      */
     isFlat: {
+      configurable: true,
       enumerable: false,
       get: function get() {
         var noFlat = Object.values(this).some(function (propValue) {
@@ -1500,6 +1575,7 @@
      * 返回对象是否是空的对象，即没有自己的可枚举的属性
      */
     noKeys: {
+      configurable: true,
       enumerable: false,
       get: function get() {
         return Object.keys(this).length == 0;
@@ -1512,6 +1588,8 @@
      * @return [any]    对象中拥有的相应key的值
      */
     getValuesOfKeys: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(keys) {
         var _this = this;
@@ -1534,6 +1612,8 @@
      *
      */
     getVirtualValuesOfKeys: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(keys) {
         var _this = this;
@@ -1556,6 +1636,8 @@
      * @returns any  对象中所有指定的属性中的第一个有效值
      */
     findValueOfKeys: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(keys) {
         var findValue;
@@ -1583,6 +1665,8 @@
      * @returns [any]  对象中所有指定格式的属性的值列表
      */
     getValuesForKeyFormats: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(key, formats) {
         var keyStrList = key.getAllStrForFormats(formats);
@@ -1600,6 +1684,8 @@
      * @returns [any]  对象中所有指定格式的属性的值列表
      */
     getVirtualValuesForKeyFormats: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(key, formats) {
         var keyStrList = key.getAllStrForFormats(formats);
@@ -1617,6 +1703,8 @@
      * @returns any  对象中所有指定格式的属性的第一个有效值
      */
     findValueForKeyFormats: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(key, formats) {
         var keyStrList = key.getAllStrForFormats(formats);
@@ -1632,6 +1720,8 @@
      * @returns boolean   当前对象是否是指定对象的子集
      */
     isSubsetOf: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(universalObj, equalTest) {
         if (!equalTest) {
@@ -1661,6 +1751,8 @@
      * @returns stopInfo ： any   终止循环时返回的信息；
      */
     depthLoopOwnProperty: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(callback, depth, all, thisValue, initDepth) {
         if (depth == undefined) {
@@ -1730,6 +1822,8 @@
      * @returns stopInfo ： any   终止循环时返回的信息；
      */
     depthLoopPropertyWithPrototype: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(callback, depth, thisValue, initDepth) {
         if (depth == undefined) {
@@ -1781,6 +1875,8 @@
      * @returns Object   返回包含符合条件的所有属性的新对象
      */
     filterProperty: {
+      configurable: true,
+      writable: true,
       enumerable: false,
       value: function value(filter, thisValue) {
         var _this3 = this;
