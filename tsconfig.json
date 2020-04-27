@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNEXT",
+    "target": "es5",
     "module": "ESNext",
     "lib": [
       "DOM",
@@ -8,10 +8,11 @@
       "ESNext",
       "ScriptHost"
     ],
-    "strict": true
+    "strict": true,
+    "esModuleInterop": true
   },
   "exclude":[
-    "dist",
+    "dist2",
     "dev"
   ]
 }
