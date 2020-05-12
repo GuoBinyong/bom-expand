@@ -9,6 +9,7 @@
       "ScriptHost"
     ],
     "strict": true,
+    "moduleResolution": "node",
     "esModuleInterop": true
   },
   "exclude":[
