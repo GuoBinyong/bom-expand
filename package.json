@@ -1,6 +1,6 @@
 {
   "name": "bom-expand",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "bom-expand 提供了对 浏览器 中 bom 对象的扩展（如 Storage 等等），也提供了一些工具函数；",
   "main": "dist/bom-expand.cjs.js",
   "module": "dist/bom-expand.esm.js",
@@ -34,14 +34,17 @@
     "pretest": "npm run build"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.9.5",
+    "@rollup/plugin-babel": "^5.0.2",
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-node-resolve": "^7.1.3",
-    "rollup": "^2.7.2",
-    "rollup-plugin-babel": "^4.2.0"
+    "eslint": "^7.0.0",
+    "rollup": "^2.7.2"
   },
   "dependencies": {
-    "es-expand": "^1.0.13"
+    "@babel/runtime": "^7.9.6",
+    "es-expand": "^1.0.16"
   }
 }
