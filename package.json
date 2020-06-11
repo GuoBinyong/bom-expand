@@ -1,6 +1,6 @@
 {
   "name": "bom-expand",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "bom-expand 提供了对 浏览器 中 bom 对象的扩展（如 Storage 等等），也提供了一些工具函数；",
   "main": "dist/bom-expand.cjs.js",
   "module": "dist/bom-expand.es.js",
