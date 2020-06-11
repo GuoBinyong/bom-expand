@@ -1,3 +1,5 @@
+import {correctParse} from "json-tls"
+
 /**
  * 接受一个键名和值作为参数，将会把键名添加到存储中，如果键名已存在，则更新其对应的值。
  *
@@ -21,5 +23,5 @@ Storage.prototype.setAnyItem = function (keyName, anyItem, replacer, space) {
  */
 Storage.prototype.getParsedItem = function (keyName, reviver) {
   let jsonStr = this.getItem(keyName);
-  return JSON.correctParse(jsonStr, reviver);
+  return correctParse(jsonStr, reviver);
 }
