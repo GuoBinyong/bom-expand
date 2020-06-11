@@ -1,7 +1,8 @@
-import "es-expand"
+import {removeScope,getBaseNameOfHumpFormat,getDependencieNames} from "package-tls"
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
+import { terser } from "rollup-plugin-terser";
 import pkg from './package.json';
 
 
@@ -17,6 +18,27 @@ import pkg from './package.json';
 /*
 共用的配置
 */
+
+
+// rollup 中共用的 output 选项
+const shareOutput = {
+	// 要插入到生成文件顶部的字段串；
+	banner: `
+/*
+${pkg.name || ""}	${pkg.version? "v"+ pkg.version : ""}
+author: ${pkg.author || ""}
+license: ${pkg.license || ""}
+homepage: ${pkg.homepage || ""}
+repository: ${(pkg.repository && pkg.repository.url) || ""}
+description: ${pkg.description || ""}
+*/
+`,
+	// 要插入到生成文件底部的字段串；
+	// footer:""
+};
+
+
+
 
 // 预设
 const presets = [
@@ -82,7 +104,7 @@ export default [
 	*/
 	{
 		...shareConf,
-		output: { file: pkg.module || `dist/${removeScope(pkg.name)}.esm.js`, format: 'es' },  // ES module
+		output: {...shareOutput, file: pkg.module || `dist/${removeScope(pkg.name)}.es.js`, format: 'es' },  // ES module
 		plugins: [
 			...shareConf.plugins.slice(0,shareConf.plugins.length - 1),
 			babel({
@@ -101,7 +123,7 @@ export default [
 
 	{
 		...shareConf,
-		output: { file: pkg.main || `dist/${removeScope(pkg.name)}.cjs.js`, format: 'cjs' }, // CommonJS
+		output: {...shareOutput, file: pkg.main || `dist/${removeScope(pkg.name)}.cjs.js`, format: 'cjs' }, // CommonJS
 	},
 
 
@@ -109,63 +131,20 @@ export default [
 	兼容各种引入方式的构建
 	特点：
 	   - 可用 <script> 标签直接引入
-	   - 也可用 AMD、CommonJS 的模块化方案引入；
+	   - 也可用 AMD、CommonJS 的模块化方案引入
 	   - 将所有依赖都构建在了一起
+	   - 对代码进行了压缩
 	*/
 	{
 		...shareConf,
-		external:undefined,   //不移除任何依赖
+        external:getDependencieNames(pkg,"peerDependencies"),   //只移除 peerDependencies 中的依赖
 		output: {
+			...shareOutput,
 			// 如果 pkg.browser 是字符串类型，则 file 为 pkg.browser，否则为 `<包名>.umd.js`
 			file: typeof pkg.browser === "string" ? pkg.browser : `dist/${removeScope(pkg.name)}.umd.js`,
 			format: 'umd',
-			name: toHumpFormat(pkg.name)  //驼峰格式的 pkg.name
+			name: getBaseNameOfHumpFormat(pkg.name),  //驼峰格式的 pkg.name
+			plugins: [terser()]     //压缩代码
 		}  // umd
 	}
 ];
-
-
-
-
-
-
-
-
-
-
-
-// 工具 ---------------------------------
-
-
-/**
- * Remove the scope prefix for the package name
- * 去除包名的 scope 前缀
- *
- * @param  pkgName : string    name of the package 包的名字
- * @returns string  Return the name after removing the scope prefix  返回去除 scope 前缀后的名字
- */
-function removeScope(pkgName) {return pkgName.replace(/@[^/]+\//,"")}
-
-
-/**
- * convert the name of the package from a divider format to a hump format, and the scope prefix is automatically removed
- * 把包的名字从分隔线格式转换成驼峰格式，并且会自动去除 scope 前缀
- *
- * @param  pkgName : string    name of the package 包的名字
- * @param separators ?: string | Array<string>   optional; default: ["-","_"] ; separator or separator good array ["-","_"]； 可选；默认值：["-","_"] ；分隔符，或 包含多个分隔符的数组
- * @returns string  return hump format string  返回驼峰格式的字符串
- */
-function toHumpFormat(pkgName, separators) {return removeScope(pkgName).toHumpFormat(separators)}
-
-
-/**
- * 获取 package.json 中配置的指定依赖类型中的所有依赖的名字列表
- * Get a list of names for all dependencies in the specified dependency type configured in package.json
- * @param package:object  必选；package.json 中的配置对象； Configuration objects in package.json
- * @param depTypes?: string | string[]    可选；默认值：["dependencies","optionalDependencies","peerDependencies"]；依赖类型的名字 或者 名字数组；     Optional; default: ["dependencies","optionalDependencies","peerDependencies"];
- * @returns Array<string>  返回包含指定依赖类型中的所有依赖名字的数组； Returns an array of all dependent names in the specified dependency type
- */
-function getDependencieNames(packageConf,depTypes){
-	depTypes = depTypes ? (typeof depTypes === "string" ? [depTypes] : depTypes) : ["dependencies","optionalDependencies","peerDependencies"];
-	return Object.keys(Object.assign({},...depTypes.map(depType=>packageConf[depType])));
-}
